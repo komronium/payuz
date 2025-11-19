@@ -1,0 +1,37 @@
+# Byte-compiled / cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Django / SQLite
+db.sqlite3
+media/
+
+# Environment / secrets
+.env
+.env.*
+
+# Virtual environments
+venv/
+env/
+.venv/
+.env/
+
+# IDE / tooling
+.idea/
+.vscode/
+*.code-workspace
+
+# Logs
+*.log
+
+# OS artifacts
+.DS_Store
+Thumbs.db
+
+# Coverage / test
+.pytest_cache/
+.coverage
+coverage.xml
+
+
