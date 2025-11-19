@@ -26,10 +26,6 @@ class Settings(BaseSettings):
     CLICK_ACCOUNT_MODEL: str = "order.models.Order"
     CLICK_AMOUNT_FIELD: str = "total_cost"
     CLICK_DISABLE_ADMIN: bool = True
-
-    class Config:
-        env_file = ".env"
-        env_file_encoding = "utf-8"
-
+    
 
 settings = Settings()
