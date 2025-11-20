@@ -7,6 +7,7 @@ from order.models import Order
 @admin.register(Order)
 class  OrderAdmin(admin.ModelAdmin):
     list_display = ('id', 'customer_name', 'phone_number', 'address', 'total_cost', 'payment_method', 'is_paid')
+    list_display_links = ('id', 'customer_name')
     list_filter = ('is_paid', 'payment_method')
     search_fields = ('id', 'customer_name', 'phone_number', 'address', 'payment_method')
     ordering = ('-created_at', )
