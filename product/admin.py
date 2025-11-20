@@ -12,6 +12,7 @@ class ProductImageInline(admin.TabularInline):
 @admin.register(Product)
 class ProductAdmin(TranslationAdmin):
     list_display = ('id', 'name_uz', 'price', 'is_active', 'created_at')
+    list_display_links = ('id', 'name_uz')
     list_filter = ('is_active', 'created_at')
     search_fields = ('name', 'name_uz', 'name_ru', 'name_en')
     ordering = ('-created_at',)
