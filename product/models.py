@@ -9,7 +9,7 @@ class Category(models.Model):
 
     class Meta:
         verbose_name = "Kategoriya"
-        verbose_name_plural = "Kategoriya"
+        verbose_name_plural = "Kategoriyalar"
         ordering = ("name", )
 
     def __str__(self):
