@@ -25,5 +25,3 @@ admin.site.unregister(Group)
 admin.site.site_header = "Gijduvan Crafts boshqaruv paneli"
 admin.site.site_title = "Gijduvan Crafts admin"
 admin.site.index_title = "Boshqaruv bo'limlari"
-
-
