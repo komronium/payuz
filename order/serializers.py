@@ -13,7 +13,7 @@ class OrderItemSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = OrderItem
-        fields = ('id', 'product', 'product_name', 'quantity', 'price', 'total_price')
+        fields = ('id', 'product', 'product_name', 'quantity', 'total_price')
 
 
 class OrderSerializer(serializers.ModelSerializer):
@@ -35,7 +35,7 @@ class OrderSerializer(serializers.ModelSerializer):
             if isinstance(product, int):
                 product = Product.objects.get(pk=product)
             # default unit price from product snapshot if not provided
-            price = item.get('price', product.price)
+            price = product.price
             quantity = item.get('quantity', 1)
             OrderItem.objects.create(order=order, product=product, quantity=quantity, price=price)
             total_cost += price * quantity
