@@ -28,7 +28,7 @@ class OrderItemInline(admin.TabularInline):
         except Exception:
             image = None
         if image and getattr(image, 'image', None) and hasattr(image.image, 'url'):
-            return format_html('<img src="{}" style="height:60px; weight: 60px; object-fit: cover; border-radius:2px;" />', image.image.url)
+            return format_html('<img src="{}" style="height: 60px; width: 60px; object-fit: cover; border-radius:2px;" />', image.image.url)
         return '-'
 
     product_thumbnail.short_description = 'Rasm'
