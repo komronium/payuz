@@ -6,7 +6,10 @@ from product.models import Product
 
 class OrderItemSerializer(serializers.ModelSerializer):
     product_name = serializers.CharField(source='product.name', read_only=True)
-    total_price = serializers.IntegerField(source='total_price', read_only=True)
+    # `total_price` is a property on the model; do not specify `source` since it's
+    # the same as the field name — specifying `source` redundantly raises an
+    # AssertionError in DRF.
+    total_price = serializers.IntegerField(read_only=True)
 
     class Meta:
         model = OrderItem
