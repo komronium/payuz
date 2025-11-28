@@ -13,11 +13,12 @@ class OrderItemSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = OrderItem
-        fields = ('id', 'product', 'product_name', 'quantity', 'total_price')
+        fields = ('id', 'product','quantity', 'total_price')
 
 
 class OrderSerializer(serializers.ModelSerializer):
     items = OrderItemSerializer(many=True)
+    product = OrderItemSerializer(many=False, read_only=True)
 
     class Meta:
         model = Order
@@ -30,9 +31,9 @@ class OrderSerializer(serializers.ModelSerializer):
         order = Order.objects.create(**validated_data)
 
         for item in items_data:
-            product = item.get('product')
-            if isinstance(product, int):
-                product = Product.objects.get(pk=product)
+            product_id = item.get('product_id')
+            if isinstance(product_id, int):
+                product = Product.objects.get(pk=product_id)
             # default unit price from product snapshot if not provided
             price = product.price
             quantity = item.get('quantity', 1)
