@@ -61,25 +61,3 @@ admin.site.unregister(Group)
 admin.site.site_header = "Gijduvan Crafts boshqaruv paneli"
 admin.site.site_title = "Gijduvan Crafts admin"
 admin.site.index_title = "Boshqaruv bo'limlari"
-
-
-@admin.register(OrderItem)
-class OrderItemAdmin(admin.ModelAdmin):
-    list_display = ("id", "product_thumbnail", "product", "order", "quantity", "price", "total_price")
-    readonly_fields = ("product_thumbnail", "total_price")
-    raw_id_fields = ("product", "order")
-
-    def product_thumbnail(self, obj):
-        try:
-            image = obj.product.images.all()[0]
-        except Exception:
-            image = None
-        if image and getattr(image, 'image', None) and hasattr(image.image, 'url'):
-            return format_html('<img src="{}" style="height:40px; border-radius:4px;" />', image.image.url)
-        return '-'
-
-    product_thumbnail.short_description = 'Rasm'
-
-    def get_queryset(self, request):
-        qs = super().get_queryset(request)
-        return qs.select_related('product', 'order').prefetch_related('product__images')

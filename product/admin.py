@@ -49,23 +49,6 @@ class ProductAdmin(TranslationAdmin):
         return qs.prefetch_related('images')
 
 
-@admin.register(ProductImage)
-class ProductImageAdmin(admin.ModelAdmin):
-    list_display = ('id', 'product', 'image_thumbnail', 'created_at')
-    readonly_fields = ('image_thumbnail',)
-    raw_id_fields = ('product',)
-
-    def image_thumbnail(self, obj):
-        if obj and getattr(obj, 'image', None) and hasattr(obj.image, 'url'):
-            return format_html('<img src="{}" style="height: 60px; width: 60px; object-fit: cover; border-radius:2px;" />', obj.image.url)
-        return '-'
-
-    image_thumbnail.short_description = 'Rasm'
-    def get_queryset(self, request):
-        qs = super().get_queryset(request)
-        return qs.select_related('product')
-
-
 @admin.register(Category)
 class CategoryAdmin(TranslationAdmin):
     list_display = ('id', 'name_uz', 'is_active', 'created_at')
