@@ -5,10 +5,7 @@ from product.models import Product
 
 
 class OrderItemSerializer(serializers.ModelSerializer):
-    product_name = serializers.CharField(source='product.name', read_only=True)
-    # `total_price` is a property on the model; do not specify `source` since it's
-    # the same as the field name — specifying `source` redundantly raises an
-    # AssertionError in DRF.
+    product = OrderItemSerializer(many=False, read_only=True)
     total_price = serializers.IntegerField(read_only=True)
 
     class Meta:
@@ -18,7 +15,7 @@ class OrderItemSerializer(serializers.ModelSerializer):
 
 class OrderSerializer(serializers.ModelSerializer):
     items = OrderItemSerializer(many=True)
-    product = OrderItemSerializer(many=False, read_only=True)
+    
 
     class Meta:
         model = Order
