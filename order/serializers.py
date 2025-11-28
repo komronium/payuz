@@ -29,7 +29,6 @@ class OrderSerializer(serializers.ModelSerializer):
         # Create the order
         order = Order.objects.create(**validated_data)
 
-        total_cost = 0
         for item in items_data:
             product = item.get('product')
             if isinstance(product, int):
@@ -38,9 +37,6 @@ class OrderSerializer(serializers.ModelSerializer):
             price = product.price
             quantity = item.get('quantity', 1)
             OrderItem.objects.create(order=order, product=product, quantity=quantity, price=price)
-            total_cost += price * quantity
 
-        order.total_cost = total_cost
         order.save()
-
         return order
