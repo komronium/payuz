@@ -8,10 +8,11 @@ from product.serializers import ProductSerializer
 class OrderItemSerializer(serializers.ModelSerializer):
     product = ProductSerializer(many=False, read_only=True)
     total_price = serializers.IntegerField(read_only=True)
+    product_id = serializers.IntegerField(write_only=True)
 
     class Meta:
         model = OrderItem
-        fields = ('id', 'product', 'quantity', 'total_price')
+        fields = ('id', 'product', 'product_id', 'quantity', 'total_price')
 
 
 class OrderSerializer(serializers.ModelSerializer):
