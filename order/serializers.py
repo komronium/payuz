@@ -25,14 +25,11 @@ class OrderSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         items_data = validated_data.pop('items', [])
-        # Create the order
         order = Order.objects.create(**validated_data)
 
         for item in items_data:
             product_id = item.get('product_id')
-            if isinstance(product_id, int):
-                product = Product.objects.get(pk=product_id)
-            # default unit price from product snapshot if not provided
+            product = Product.objects.get(pk=product_id)
             price = product.price
             quantity = item.get('quantity', 1)
             OrderItem.objects.create(order=order, product=product, quantity=quantity, price=price)
